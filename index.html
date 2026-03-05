@@ -3,845 +3,1009 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Análise de Cursos — Despertar 2025</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<title>Robótica na Despertar — Análise Completa 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #0f0f0f;
-    --paper: #f5f0e8;
-    --accent: #e8420a;
-    --accent2: #1a6b3c;
-    --accent3: #1d4fa3;
-    --soft: #ebe5d5;
-    --mid: #c8bfaa;
-    --warn: #e8a00a;
-  }
+:root {
+  --ink: #111318;
+  --paper: #f3efe8;
+  --white: #ffffff;
+  --soft: #e8e3d8;
+  --mid: #c9c2b4;
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  --rob: #d93a0a;
+  --rob-l: #fce8e2;
+  --tech: #0e4da4;
+  --tech-l: #dce8fb;
+  --gestao: #186638;
+  --gestao-l: #ddf0e6;
+  --warn: #b86e00;
+  --warn-l: #fdf0dc;
+  --gray: #6b7280;
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    font-size: 15px;
-    line-height: 1.6;
-  }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
 
-  /* HERO */
-  .hero {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 64px 48px 56px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 400px; height: 400px;
-    border: 2px solid rgba(245,240,232,0.08);
-    border-radius: 50%;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    top: 20px; right: 60px;
-    width: 220px; height: 220px;
-    border: 2px solid rgba(245,240,232,0.06);
-    border-radius: 50%;
-  }
-  .hero-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 800;
-    line-height: 1.05;
-    max-width: 700px;
-    margin-bottom: 24px;
-  }
-  .hero h1 span {
-    color: var(--accent);
-  }
-  .hero-sub {
-    font-size: 16px;
-    color: rgba(245,240,232,0.65);
-    max-width: 560px;
-    font-weight: 300;
-  }
-  .hero-meta {
-    margin-top: 40px;
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-  .meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .meta-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--paper);
-  }
-  .meta-label {
-    font-size: 12px;
-    color: rgba(245,240,232,0.5);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
 
-  /* MAIN */
-  main { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 56px 52px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-circles { position:absolute; inset:0; pointer-events:none; }
+.hero-circles span {
+  position:absolute; border-radius:50%;
+  border: 1.5px solid rgba(255,255,255,0.05);
+}
+.hero-circles span:nth-child(1){width:420px;height:420px;top:-160px;right:-80px;}
+.hero-circles span:nth-child(2){width:240px;height:240px;top:10px;right:90px;}
+.hero-circles span:nth-child(3){width:110px;height:110px;bottom:24px;left:360px;}
 
-  /* VERDICT BANNER */
-  .verdict {
-    background: var(--accent);
-    color: white;
-    padding: 32px 40px;
-    margin: 48px 0 0;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 24px;
-    align-items: center;
-  }
-  .verdict-icon {
-    font-size: 3rem;
-    line-height: 1;
-  }
-  .verdict h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .verdict p { font-size: 14px; opacity: 0.9; font-weight: 300; }
+.hero-pills { display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; }
+.pill {
+  font-family:'Syne',sans-serif; font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; font-weight:700; padding:4px 12px; border-radius:100px;
+}
+.pill-rob  { background:var(--rob);   color:#fff; }
+.pill-tech { background:var(--tech);  color:#fff; }
+.pill-gest { background:var(--gestao);color:#fff; }
 
-  /* SECTION */
-  section { margin-top: 64px; }
-  .section-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  section > h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.9rem;
-    font-weight: 700;
-    border-bottom: 2px solid var(--ink);
-    padding-bottom: 12px;
-    margin-bottom: 32px;
-  }
+.hero h1 {
+  font-family:'Syne',sans-serif;
+  font-size: clamp(2rem,4.5vw,3.5rem);
+  font-weight:800; line-height:1.06; max-width:760px; margin-bottom:18px;
+}
+.hero h1 em { font-style:normal; color:var(--rob); }
+.hero-sub {
+  font-size:15px; color:rgba(243,239,232,0.6);
+  max-width:620px; font-weight:300; line-height:1.75;
+}
 
-  /* CARDS GRID */
-  .cards-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .cards-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
+.hero-stats {
+  margin-top:40px; padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex; gap:0; flex-wrap:wrap;
+}
+.hstat { padding:0 36px 0 0; margin-right:36px; border-right:1px solid rgba(255,255,255,0.1); }
+.hstat:last-child { border-right:none; }
+.hstat-n {
+  font-family:'Syne',sans-serif; font-size:2.1rem; font-weight:800; line-height:1; margin-bottom:4px;
+}
+.hstat-n.r{color:#f87;} .hstat-n.t{color:#7ab4fa;} .hstat-n.g{color:#72e0a0;} .hstat-n.w{color:#fbc96e;}
+.hstat-l { font-size:11px; color:rgba(243,239,232,0.42); letter-spacing:1px; text-transform:uppercase; }
 
-  .card {
-    background: white;
-    border: 1.5px solid var(--mid);
-    padding: 28px;
-    position: relative;
-  }
-  .card.accent-border { border-left: 5px solid var(--accent); }
-  .card.green-border { border-left: 5px solid var(--accent2); }
-  .card.blue-border { border-left: 5px solid var(--accent3); }
-  .card.warn-border { border-left: 5px solid var(--warn); }
+/* ═══════════════════════════════════════
+   TAB NAV
+═══════════════════════════════════════ */
+.tab-bar {
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,0.07);
+  display:flex; overflow-x:auto;
+  padding:0 52px;
+  position:sticky; top:0; z-index:100;
+}
+.tab-btn {
+  background:none; border:none; cursor:pointer; color:rgba(243,239,232,0.38);
+  font-family:'Syne',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase;
+  font-weight:700; padding:16px 0; margin-right:32px; white-space:nowrap;
+  border-bottom:2px solid transparent; transition:all .2s;
+}
+.tab-btn:hover { color:rgba(243,239,232,0.75); }
+.tab-btn.active { color:var(--paper); border-bottom-color:var(--rob); }
 
-  .card-tag {
-    display: inline-block;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 3px 10px;
-    margin-bottom: 14px;
-    border-radius: 2px;
-  }
-  .tag-red { background: #fce8e2; color: var(--accent); }
-  .tag-green { background: #e2f0e8; color: var(--accent2); }
-  .tag-blue { background: #e2eaf8; color: var(--accent3); }
-  .tag-warn { background: #fdf3e2; color: #a06a00; }
-  .tag-gray { background: var(--soft); color: #666; }
+/* ═══════════════════════════════════════
+   TAB PANELS
+═══════════════════════════════════════ */
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
 
-  .card h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .card p { font-size: 14px; color: #444; line-height: 1.65; }
-  .big-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1;
-    margin: 8px 0 4px;
-  }
-  .big-num.red { color: var(--accent); }
-  .big-num.green { color: var(--accent2); }
-  .big-num.blue { color: var(--accent3); }
+/* ═══════════════════════════════════════
+   MAIN WRAPPER
+═══════════════════════════════════════ */
+.main { max-width:1120px; margin:0 auto; padding:0 36px 100px; }
 
-  /* BAR CHART */
-  .bar-chart { margin-top: 8px; }
-  .bar-row {
-    display: grid;
-    grid-template-columns: 160px 1fr 48px;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .bar-label { font-size: 13px; text-align: right; color: #333; }
-  .bar-track { background: var(--soft); height: 22px; border-radius: 2px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 2px; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 600; color: white; transition: width 0.5s ease; }
-  .bar-count { font-size: 13px; font-weight: 600; color: #333; }
-  .bar-fill.c1 { background: #e8420a; }
-  .bar-fill.c2 { background: #1a6b3c; }
-  .bar-fill.c3 { background: #1d4fa3; }
-  .bar-fill.c4 { background: #8b4a9c; }
-  .bar-fill.c5 { background: #c87a00; }
-  .bar-fill.c6 { background: #2a7fa5; }
-  .bar-fill.c7 { background: #5a6e3f; }
-  .bar-fill.c8 { background: #c83a5a; }
-  .bar-fill.c9 { background: #3a6a8a; }
-  .bar-fill.c10 { background: #7a5a2a; }
-  .bar-fill.gray { background: #888; }
-  .bar-fill.highlight { background: var(--warn); }
+/* ═══════════════════════════════════════
+   SECTION
+═══════════════════════════════════════ */
+section { margin-top:68px; }
+.sec-eye { display:flex; align-items:center; gap:10px; margin-bottom:7px; }
+.sec-num { font-family:'Syne',sans-serif; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--mid); }
+.sec-tag {
+  font-family:'Syne',sans-serif; font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; font-weight:700; padding:3px 10px; border-radius:2px;
+}
+.st-rob   { background:var(--rob-l);  color:var(--rob); }
+.st-tech  { background:var(--tech-l); color:var(--tech); }
+.st-gest  { background:var(--gestao-l);color:var(--gestao); }
+.st-both  { background:var(--soft);   color:var(--ink); }
+.st-warn  { background:var(--warn-l); color:var(--warn); }
 
-  /* CHART CANVAS */
-  .chart-wrap { background: white; border: 1.5px solid var(--mid); padding: 28px; margin-top: 24px; }
-  .chart-wrap h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 20px; }
+section > .sec-h { font-family:'Syne',sans-serif; font-size:1.85rem; font-weight:700; border-bottom:2px solid var(--ink); padding-bottom:14px; margin-bottom:28px; }
 
-  /* INSIGHT BOX */
-  .insight {
-    background: var(--soft);
-    border-left: 4px solid var(--ink);
-    padding: 20px 24px;
-    margin-top: 24px;
-    font-size: 14px;
-    line-height: 1.7;
-  }
-  .insight strong { font-weight: 600; }
+/* ═══════════════════════════════════════
+   VERDICT
+═══════════════════════════════════════ */
+.verdict-split {
+  display:grid; grid-template-columns:1fr 1fr; gap:0;
+  border:2px solid var(--ink); margin-top:52px;
+}
+.vs-side { padding:30px 36px; }
+.vs-side:first-child { background:var(--rob); color:#fff; border-right:2px solid var(--ink); }
+.vs-side:last-child  { background:var(--gestao); color:#fff; }
+.vs-eye { font-family:'Syne',sans-serif; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; opacity:.6; margin-bottom:10px; }
+.vs-side h2 { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; line-height:1.3; margin-bottom:10px; }
+.vs-side p  { font-size:13.5px; opacity:.88; font-weight:300; line-height:1.7; }
 
-  /* TABLE */
-  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
-  th { background: var(--ink); color: var(--paper); font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 10px 14px; text-align: left; }
-  td { padding: 10px 14px; border-bottom: 1px solid var(--soft); vertical-align: middle; }
-  tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
-  .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 2px; letter-spacing: 1px; }
-  .badge.high { background: #e2f0e8; color: var(--accent2); }
-  .badge.med { background: #fdf3e2; color: #a06a00; }
-  .badge.low { background: #fce8e2; color: var(--accent); }
+/* Verdict single (v1 style) */
+.verdict-single {
+  background:var(--rob); color:#fff;
+  padding:28px 36px; margin-top:48px;
+  display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:center;
+}
+.verdict-single .vi { font-size:2.8rem; line-height:1; }
+.verdict-single h2  { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:700; margin-bottom:8px; }
+.verdict-single p   { font-size:13.5px; opacity:.9; font-weight:300; }
 
-  /* RECOMMENDATION */
-  .reco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 24px; }
-  .reco-card {
-    padding: 22px 24px;
-    border: 1.5px solid var(--mid);
-    background: white;
-    position: relative;
-    overflow: hidden;
-  }
-  .reco-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 4px;
-  }
-  .reco-card.go::after { background: var(--accent2); }
-  .reco-card.maybe::after { background: var(--warn); }
-  .reco-card.no::after { background: var(--accent); }
-  .reco-rank {
-    font-family: 'Syne', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 800;
-    opacity: 0.08;
-    position: absolute;
-    right: 16px; top: 8px;
-  }
-  .reco-card h4 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .reco-card p { font-size: 12.5px; color: #555; line-height: 1.6; }
-  .go .reco-rank { color: var(--accent2); }
-  .maybe .reco-rank { color: var(--warn); }
-  .no .reco-rank { color: var(--accent); }
+/* ═══════════════════════════════════════
+   AXIS CARDS
+═══════════════════════════════════════ */
+.axis-pair { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:24px; }
+.axis-card { padding:24px 28px; border:1.5px solid; }
+.axis-card.tech  { border-color:var(--tech);  background:var(--tech-l); }
+.axis-card.gestao{ border-color:var(--gestao);background:var(--gestao-l); }
+.axis-card h3    { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:6px; }
+.axis-card.tech  h3 { color:var(--tech);  }
+.axis-card.gestao h3{ color:var(--gestao); }
+.axis-card p { font-size:13px; color:#333; }
+.axis-big { font-family:'Syne',sans-serif; font-size:2.8rem; font-weight:800; line-height:1; margin:6px 0 2px; }
+.axis-card.tech  .axis-big { color:var(--tech); }
+.axis-card.gestao .axis-big { color:var(--gestao); }
 
-  /* FOOTER */
-  footer {
-    background: var(--ink);
-    color: rgba(245,240,232,0.4);
-    text-align: center;
-    padding: 32px;
-    font-size: 12px;
-    letter-spacing: 1px;
-    margin-top: 80px;
-  }
+/* ═══════════════════════════════════════
+   CARDS
+═══════════════════════════════════════ */
+.g3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:18px; }
+.g2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:18px; }
 
-  @media (max-width: 600px) {
-    .hero { padding: 40px 24px; }
-    main { padding: 0 20px 60px; }
-    .bar-row { grid-template-columns: 100px 1fr 40px; }
-    .bar-label { font-size: 11px; }
-  }
+.card { background:var(--white); border:1.5px solid var(--mid); padding:26px 28px; position:relative; }
+.card-stripe { height:4px; margin:-26px -28px 20px; }
+.cs-rob   { background:var(--rob); }
+.cs-tech  { background:var(--tech); }
+.cs-gest  { background:var(--gestao); }
+.cs-warn  { background:var(--warn); }
+.cs-both  { background:linear-gradient(90deg,var(--tech) 50%,var(--gestao) 50%); }
+.cs-gray  { background:var(--mid); }
+
+.badge-sm {
+  display:inline-block; font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+  font-weight:700; padding:3px 9px; border-radius:2px; margin-bottom:12px;
+}
+.bs-rob  { background:var(--rob-l);   color:var(--rob); }
+.bs-tech { background:var(--tech-l);  color:var(--tech); }
+.bs-gest { background:var(--gestao-l);color:var(--gestao); }
+.bs-warn { background:var(--warn-l);  color:var(--warn); }
+.bs-gray { background:var(--soft);    color:#555; }
+
+.card h3 { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:8px; line-height:1.3; }
+.card p  { font-size:13.5px; color:#444; line-height:1.65; }
+
+.bignum { font-family:'Syne',sans-serif; font-size:3.2rem; font-weight:800; line-height:1; margin:6px 0 4px; }
+.bn-rob  { color:var(--rob); }
+.bn-tech { color:var(--tech); }
+.bn-gest { color:var(--gestao); }
+.bn-warn { color:var(--warn); }
+
+/* ═══════════════════════════════════════
+   BAR CHARTS
+═══════════════════════════════════════ */
+.chart-box { background:var(--white); border:1.5px solid var(--mid); padding:28px 32px; margin-top:22px; }
+.chart-box h3 { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; margin-bottom:20px; }
+.chart-box .csub { font-size:12px; color:#999; font-weight:400; margin-left:8px; font-family:'DM Sans',sans-serif; }
+
+.bchart { display:flex; flex-direction:column; gap:8px; }
+.brow { display:grid; grid-template-columns:178px 1fr 46px; align-items:center; gap:10px; }
+.blabel { font-size:12.5px; text-align:right; color:#333; line-height:1.3; }
+.blabel.bld { font-weight:700; }
+.btrack { background:var(--soft); height:24px; border-radius:2px; overflow:hidden; }
+.bfill  { height:100%; border-radius:2px; display:flex; align-items:center; padding-left:8px; font-size:10px; font-weight:700; color:#fff; letter-spacing:.3px; }
+.bcount { font-size:12.5px; font-weight:600; color:#333; }
+
+.bf-rob   { background:var(--rob); }
+.bf-tech  { background:var(--tech); }
+.bf-gest  { background:var(--gestao); }
+.bf-warn  { background:var(--warn); }
+.bf-gray  { background:#aaa; }
+.bf-blue2 { background:#4a7cd0; }
+.bf-grn2  { background:#4a9e72; }
+.bf-purp  { background:#7b4fa8; }
+.bf-teal  { background:#1a8f8a; }
+
+.bsep { font-family:'Syne',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); padding:6px 0 2px; border-top:1px solid var(--soft); margin-top:4px; }
+
+/* ═══════════════════════════════════════
+   HIGHLIGHT / INSIGHT
+═══════════════════════════════════════ */
+.hl { padding:20px 26px; margin-top:18px; border-left:4px solid; font-size:13.5px; line-height:1.75; }
+.hl.rob  { border-color:var(--rob);   background:var(--rob-l); }
+.hl.tech { border-color:var(--tech);  background:var(--tech-l); }
+.hl.gest { border-color:var(--gestao);background:var(--gestao-l); }
+.hl.dark { border-color:var(--ink);   background:var(--soft); }
+.hl.warn { border-color:var(--warn);  background:var(--warn-l); }
+.hl strong { font-weight:600; }
+
+/* ═══════════════════════════════════════
+   MATRIX
+═══════════════════════════════════════ */
+.matrix-wrap { background:var(--white); border:1.5px solid var(--mid); padding:32px; margin-top:22px; }
+.matrix-wrap h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:24px; }
+.matrix {
+  display:grid;
+  grid-template-columns:36px 1fr 1fr;
+  grid-template-rows:1fr 1fr 36px;
+  gap:3px; height:370px;
+}
+.mcell { padding:14px 16px; border-radius:3px; display:flex; flex-direction:column; gap:5px; }
+.mc-hh { background:#e4f5ec; border:1.5px solid #8dd4a8; }
+.mc-hl { background:#fff3e0; border:1.5px solid #ffc97a; }
+.mc-lh { background:#e3f2fd; border:1.5px solid #90caf9; }
+.mc-ll { background:#fce4ec; border:1.5px solid #f48fb1; }
+.mc-lbl { font-family:'Syne',sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; opacity:.5; }
+.mc-item { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:500; margin:1px 0; }
+.mc-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.mcd-rob  { background:var(--rob); }
+.mcd-tech { background:var(--tech); }
+.mcd-gest { background:var(--gestao); }
+.mcd-warn { background:var(--warn); }
+.mcd-gray { background:#aaa; }
+.mat-y {
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#888;
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  grid-column:1; grid-row:1/3;
+}
+.mat-x {
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#888;
+  grid-column:2/4; grid-row:3; gap:20px;
+}
+.mat-x span { flex:1; text-align:center; }
+
+/* ═══════════════════════════════════════
+   TABLE
+═══════════════════════════════════════ */
+.tbl-scroll { overflow-x:auto; margin-top:18px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th {
+  background:var(--ink); color:var(--paper);
+  font-family:'Syne',sans-serif; font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+  padding:11px 14px; text-align:left; white-space:nowrap;
+}
+td { padding:10px 14px; border-bottom:1px solid var(--soft); vertical-align:middle; }
+tr:hover td { background:rgba(0,0,0,.015); }
+tr.row-rob td { background:#fffbf4; font-weight:500; }
+.bdg { display:inline-block; font-size:10px; font-weight:700; padding:2px 9px; border-radius:2px; letter-spacing:.5px; white-space:nowrap; }
+.bdg-h { background:var(--gestao-l); color:var(--gestao); }
+.bdg-m { background:var(--warn-l);   color:var(--warn); }
+.bdg-l { background:var(--rob-l);    color:var(--rob); }
+.bdg-t { background:var(--tech-l);   color:var(--tech); }
+.bdg-g { background:var(--gestao-l); color:var(--gestao); }
+
+/* ═══════════════════════════════════════
+   ROADMAP
+═══════════════════════════════════════ */
+.roadmap { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1.5px solid var(--mid); margin-top:22px; }
+.rm-step { padding:26px 24px; border-right:1.5px solid var(--mid); background:var(--white); position:relative; }
+.rm-step:last-child { border-right:none; }
+.rm-num { font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; opacity:.07; position:absolute; top:12px; right:16px; line-height:1; }
+.rm-period { font-family:'Syne',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:10px; }
+.rm-step:nth-child(1) .rm-period { color:var(--tech); }
+.rm-step:nth-child(2) .rm-period { color:var(--gestao); }
+.rm-step:nth-child(3) .rm-period { color:var(--rob); }
+.rm-step h4 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:10px; }
+.rm-step ul { list-style:none; display:flex; flex-direction:column; gap:7px; }
+.rm-step ul li { font-size:13px; color:#444; padding-left:14px; position:relative; line-height:1.5; }
+.rm-step ul li::before { content:'→'; position:absolute; left:0; font-size:11px; color:var(--mid); }
+
+/* ═══════════════════════════════════════
+   RECO GRID (v1 style)
+═══════════════════════════════════════ */
+.reco-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:16px; }
+.rc {
+  padding:20px 22px; border:1.5px solid var(--mid); background:var(--white);
+  position:relative; overflow:hidden;
+}
+.rc::after { content:''; position:absolute; top:0; left:0; width:100%; height:4px; }
+.rc.go::after    { background:var(--gestao); }
+.rc.maybe::after { background:var(--warn); }
+.rc.no::after    { background:var(--rob); }
+.rc-rank { font-family:'Syne',sans-serif; font-size:2.4rem; font-weight:800; opacity:.07; position:absolute; right:14px; top:8px; }
+.rc.go .rc-rank    { color:var(--gestao); }
+.rc.maybe .rc-rank { color:var(--warn); }
+.rc.no .rc-rank    { color:var(--rob); }
+.rc h4 { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; margin-bottom:6px; }
+.rc p  { font-size:12.5px; color:#555; line-height:1.6; }
+
+/* ═══════════════════════════════════════
+   FINAL RECO DARK BOX
+═══════════════════════════════════════ */
+.reco-dark { background:var(--ink); color:var(--paper); padding:40px 48px; margin-top:28px; }
+.reco-dark h3 { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:700; margin-bottom:18px; }
+.reco-dark h3 span { color:var(--rob); }
+.reco-dark .sub { font-size:13.5px; color:rgba(243,239,232,.65); font-weight:300; line-height:1.75; max-width:680px; }
+.rp-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:24px; }
+.rp { padding:20px 22px; border:1px solid rgba(255,255,255,.1); }
+.rp-n { font-family:'Syne',sans-serif; font-size:1.8rem; font-weight:800; opacity:.12; margin-bottom:-6px; }
+.rp h4 { font-family:'Syne',sans-serif; font-size:.9rem; font-weight:700; margin-bottom:6px; }
+.rp p  { font-size:13px; color:rgba(243,239,232,.62); line-height:1.65; }
+.rp.go    { border-top:3px solid var(--gestao); }
+.rp.watch { border-top:3px solid #5b9ef8; }
+.rp.maybe { border-top:3px solid var(--warn); }
+
+/* ═══════════════════════════════════════
+   DIVIDER BETWEEN PARTS
+═══════════════════════════════════════ */
+.part-divider {
+  margin: 80px 0 0;
+  border-top: 3px solid var(--ink);
+  padding-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.pd-badge {
+  font-family:'Syne',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase;
+  font-weight:700; padding:6px 16px; border-radius:2px; white-space:nowrap;
+}
+.pd-1 { background:var(--rob); color:#fff; }
+.pd-2 { background:var(--ink); color:var(--paper); }
+.pd-line { flex:1; height:2px; background:var(--soft); }
+.pd-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background:var(--ink); color:rgba(243,239,232,.35);
+  text-align:center; padding:28px 40px;
+  font-size:11.5px; letter-spacing:1px; margin-top:80px;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:700px){
+  .hero { padding:36px 22px 40px; }
+  .tab-bar { padding:0 20px; }
+  .main { padding:0 18px 60px; }
+  .verdict-split { grid-template-columns:1fr; }
+  .vs-side:first-child { border-right:none; border-bottom:2px solid var(--ink); }
+  .axis-pair { grid-template-columns:1fr; }
+  .brow { grid-template-columns:110px 1fr 36px; }
+  .roadmap { grid-template-columns:1fr; }
+  .rm-step { border-right:none; border-bottom:1.5px solid var(--mid); }
+  .rp-grid { grid-template-columns:1fr; }
+  .hstat { margin-right:20px; padding-right:20px; }
+  .reco-dark { padding:28px 24px; }
+}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<!-- ════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
 <div class="hero">
-  <div class="hero-label">Despertar · Análise de Dados · 2025</div>
-  <h1>Devemos implantar o curso de <span>Robótica?</span></h1>
-  <p class="hero-sub">Análise completa baseada em 6 pesquisas, 354 respostas sobre interesse em cursos, 211 jovens e 75 famílias ouvidos.</p>
-  <div class="hero-meta">
-    <div class="meta-item">
-      <span class="meta-num">354</span>
-      <span class="meta-label">Respostas sobre cursos</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-num">211</span>
-      <span class="meta-label">Jovens entrevistados</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-num">75</span>
-      <span class="meta-label">Famílias ouvidas</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-num">6</span>
-      <span class="meta-label">Fontes de dados</span>
-    </div>
+  <div class="hero-circles"><span></span><span></span><span></span></div>
+  <div class="hero-pills">
+    <span class="pill pill-rob">Robótica</span>
+    <span class="pill pill-tech">Eixo Tecnologia</span>
+    <span class="pill pill-gest">Eixo Gestão</span>
+  </div>
+  <h1>Devemos implantar<br>o curso de <em>Robótica?</em></h1>
+  <p class="hero-sub">Análise completa em dois níveis: visão geral de toda a escola e visão contextualizada nos eixos estratégicos de Gestão e Tecnologia — com dados de 6 pesquisas, 354 respostas sobre cursos, 211 jovens e 75 famílias.</p>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-n r">354</div><div class="hstat-l">Respostas sobre cursos</div></div>
+    <div class="hstat"><div class="hstat-n t">135</div><div class="hstat-l">Adolescentes 15–17 anos</div></div>
+    <div class="hstat"><div class="hstat-n g">75</div><div class="hstat-l">Famílias ouvidas</div></div>
+    <div class="hstat"><div class="hstat-n w">6</div><div class="hstat-l">Fontes de dados</div></div>
   </div>
 </div>
 
-<main>
+<!-- ════════════════════════════════════════════════
+     TAB BAR
+════════════════════════════════════════════════ -->
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" data-tab="visao-geral" role="tab">Visão geral</button>
+  <button class="tab-btn" data-tab="contexto" role="tab">Contexto dos eixos</button>
+</div>
 
-  <!-- VERDICT -->
-  <div class="verdict">
-    <div class="verdict-icon">⚠️</div>
+<!-- ════════════════════════════════════════════════
+     PAINEL 1 — VISÃO GERAL
+════════════════════════════════════════════════ -->
+<div id="visao-geral" class="tab-panel active">
+<div class="main">
+
+  <!-- VEREDICTO -->
+  <div class="verdict-single">
+    <div class="vi">⚠️</div>
     <div>
-      <h2>Veredicto: Robótica tem demanda real, mas não é prioridade máxima agora</h2>
-      <p>Com apenas 7 menções diretas (2% do total), a robótica aparece como interesse legítimo, porém tímido. O mercado de tecnologia é fortíssimo na comunidade — mas outras frentes têm demanda 2 a 9 vezes maior. A recomendação é implantar como módulo integrado ou trilha futura, não como curso isolado e imediato.</p>
+      <h2>Veredicto geral: robótica tem demanda real, mas não é prioridade máxima isolada</h2>
+      <p>Com apenas 7 menções diretas (2% do total de 354 respostas), a robótica aparece como interesse legítimo, mas tímido. O mercado tech é fortíssimo — porém outras frentes têm demanda 2 a 9× maior. A recomendação é implantar como módulo integrado ou trilha futura, não como curso isolado imediato.</p>
     </div>
   </div>
 
-  <!-- SECÇÃO 1: ROBÓTICA -->
+  <!-- S1: ROBÓTICA NOS DADOS -->
   <section>
-    <div class="section-label">01 — Foco principal</div>
-    <h2>Robótica nos dados: o que os números dizem</h2>
-
-    <div class="cards-3">
-      <div class="card accent-border">
-        <span class="card-tag tag-red">Interesse direto</span>
-        <div class="big-num red">7</div>
+    <div class="sec-eye"><span class="sec-num">01</span><span class="sec-tag st-rob">Foco principal</span></div>
+    <h2 class="sec-h">Robótica nos dados: o que os números dizem</h2>
+    <div class="g3">
+      <div class="card">
+        <div class="card-stripe cs-rob"></div>
+        <span class="badge-sm bs-rob">Interesse direto</span>
+        <div class="bignum bn-rob">7</div>
         <h3>Menções à robótica</h3>
-        <p>De 354 respostas sobre desejos de cursos, apenas 7 citaram robótica diretamente — posição 11ª no ranking geral, empatada com barbearia e fotografia.</p>
+        <p>De 354 respostas, apenas 7 citaram robótica diretamente — posição 11ª no ranking geral, empatada com barbearia e fotografia.</p>
       </div>
-      <div class="card warn-border">
-        <span class="card-tag tag-warn">Contexto</span>
-        <div class="big-num" style="color: var(--warn);">2%</div>
+      <div class="card">
+        <div class="card-stripe cs-warn"></div>
+        <span class="badge-sm bs-warn">Contexto</span>
+        <div class="bignum bn-warn">2%</div>
         <h3>Fatia do interesse total</h3>
-        <p>Representa menos de 1 em cada 50 respostas. As menções se concentraram em 2025.1 (6 de 7), sugerindo demanda mais pontual do que crescente.</p>
+        <p>Menos de 1 em cada 50 respostas. As menções se concentraram em 2025.1 (6 de 7), sugerindo demanda mais pontual do que crescente no universo geral.</p>
       </div>
-      <div class="card blue-border">
-        <span class="card-tag tag-blue">Cluster tech</span>
-        <div class="big-num blue">59</div>
+      <div class="card">
+        <div class="card-stripe cs-tech"></div>
+        <span class="badge-sm bs-tech">Cluster tech</span>
+        <div class="bignum bn-tech">59</div>
         <h3>Menções ao cluster tech</h3>
-        <p>Robótica integra um cluster tecnológico robusto. Somando programação, jogos, informática e manutenção, tech responde por <strong>17%</strong> de todo interesse mapeado.</p>
+        <p>Somando programação, jogos, informática e manutenção, tech responde por <strong>17%</strong> de todo interesse mapeado — base sólida onde robótica se encaixa.</p>
       </div>
     </div>
-
-    <div class="insight">
-      <strong>Leitura estratégica:</strong> A robótica não tem demanda suficiente para justificar um curso autônomo neste momento. Porém, os jovens que a citaram frequentemente a associaram a <em>jogos digitais, programação e informática</em> — indicando que o interesse real é por tecnologia criativa e aplicada. Um curso de robótica integrado a programação teria muito mais tração do que um curso isolado.
+    <div class="hl dark">
+      <strong>Leitura estratégica:</strong> A robótica não tem demanda suficiente para um curso autônomo agora. Porém, os jovens que a citaram sempre a associaram a <em>jogos digitais, programação e informática</em> — o interesse real é por tecnologia criativa e aplicada. Um módulo de robótica integrado à programação teria muito mais tração.
     </div>
   </section>
 
-  <!-- SECÇÃO 2: PANORAMA GERAL -->
+  <!-- S2: PANORAMA GERAL -->
   <section>
-    <div class="section-label">02 — Panorama</div>
-    <h2>O que a comunidade quer de verdade</h2>
-
-    <div class="chart-wrap">
-      <h3>Top 15 cursos mais desejados — todas as fontes (2025.1 + 2025.2)</h3>
-      <div class="bar-chart">
-        <div class="bar-row">
-          <div class="bar-label">Inglês</div>
-          <div class="bar-track"><div class="bar-fill c1" style="width:100%"></div></div>
-          <div class="bar-count">66</div>
+    <div class="sec-eye"><span class="sec-num">02</span><span class="sec-tag st-both">Panorama</span></div>
+    <h2 class="sec-h">O que a comunidade quer: top 15 cursos</h2>
+    <div class="chart-box">
+      <h3>Top 15 cursos mais desejados <span class="csub">todas as fontes · 2025.1 + 2025.2</span></h3>
+      <div class="bchart">
+        <div class="brow"><div class="blabel bld">Inglês</div><div class="btrack"><div class="bfill bf-rob" style="width:100%">🏆 1º</div></div><div class="bcount">66</div></div>
+        <div class="brow"><div class="blabel">Música</div><div class="btrack"><div class="bfill bf-purp" style="width:27%"></div></div><div class="bcount">18</div></div>
+        <div class="brow"><div class="blabel">Espanhol</div><div class="btrack"><div class="bfill bf-blue2" style="width:21%"></div></div><div class="bcount">14</div></div>
+        <div class="brow"><div class="blabel">Dev. de Jogos</div><div class="btrack"><div class="bfill bf-tech" style="width:18%">tech</div></div><div class="bcount">12</div></div>
+        <div class="brow"><div class="blabel">Informática</div><div class="btrack"><div class="bfill bf-tech" style="width:14%"></div></div><div class="bcount">9</div></div>
+        <div class="brow"><div class="blabel">Teatro</div><div class="btrack"><div class="bfill bf-gray" style="width:12%"></div></div><div class="bcount">8</div></div>
+        <div class="brow"><div class="blabel">Libras</div><div class="btrack"><div class="bfill bf-grn2" style="width:12%"></div></div><div class="bcount">8</div></div>
+        <div class="brow"><div class="blabel">Culinária</div><div class="btrack"><div class="bfill bf-warn" style="width:12%"></div></div><div class="bcount">8</div></div>
+        <div class="brow"><div class="blabel">Confeitaria</div><div class="btrack"><div class="bfill bf-warn" style="width:11%"></div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Barbearia</div><div class="btrack"><div class="bfill bf-gray" style="width:11%"></div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Fotografia</div><div class="btrack"><div class="bfill bf-gray" style="width:11%"></div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Outros Prog.</div><div class="btrack"><div class="bfill bf-tech" style="width:11%"></div></div><div class="bcount">7</div></div>
+        <div class="brow">
+          <div class="blabel bld" style="color:var(--rob)">▶ Robótica</div>
+          <div class="btrack"><div class="bfill bf-rob" style="width:11%">11º</div></div>
+          <div class="bcount">7</div>
         </div>
-        <div class="bar-row">
-          <div class="bar-label">Música</div>
-          <div class="bar-track"><div class="bar-fill c2" style="width:27%"></div></div>
-          <div class="bar-count">18</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Espanhol</div>
-          <div class="bar-track"><div class="bar-fill c3" style="width:21%"></div></div>
-          <div class="bar-count">14</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Dev. de Jogos</div>
-          <div class="bar-track"><div class="bar-fill c4" style="width:18%"></div></div>
-          <div class="bar-count">12</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Informática</div>
-          <div class="bar-track"><div class="bar-fill c6" style="width:14%"></div></div>
-          <div class="bar-count">9</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Teatro</div>
-          <div class="bar-track"><div class="bar-fill c8" style="width:12%"></div></div>
-          <div class="bar-count">8</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Libras</div>
-          <div class="bar-track"><div class="bar-fill c7" style="width:12%"></div></div>
-          <div class="bar-count">8</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Culinária</div>
-          <div class="bar-track"><div class="bar-fill c5" style="width:12%"></div></div>
-          <div class="bar-count">8</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Confeitaria</div>
-          <div class="bar-track"><div class="bar-fill c5" style="width:11%"></div></div>
-          <div class="bar-count">7</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Barbearia</div>
-          <div class="bar-track"><div class="bar-fill gray" style="width:11%"></div></div>
-          <div class="bar-count">7</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Fotografia</div>
-          <div class="bar-track"><div class="bar-fill gray" style="width:11%"></div></div>
-          <div class="bar-count">7</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Outros Prog.</div>
-          <div class="bar-track"><div class="bar-fill c4" style="width:11%"></div></div>
-          <div class="bar-count">7</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label" style="font-weight:700; color:var(--warn)">Robótica ▶</div>
-          <div class="bar-track"><div class="bar-fill highlight" style="width:11%"></div></div>
-          <div class="bar-count">7</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Dança</div>
-          <div class="bar-track"><div class="bar-fill gray" style="width:11%"></div></div>
-          <div class="bar-count">7</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Empreendedorismo</div>
-          <div class="bar-track"><div class="bar-fill c2" style="width:9%"></div></div>
-          <div class="bar-count">6</div>
-        </div>
+        <div class="brow"><div class="blabel">Dança</div><div class="btrack"><div class="bfill bf-gray" style="width:11%"></div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Empreendedorismo</div><div class="btrack"><div class="bfill bf-gest" style="width:9%">gestão</div></div><div class="bcount">6</div></div>
       </div>
     </div>
   </section>
 
-  <!-- SECÇÃO 3: CATEGORIAS -->
+  <!-- S3: CATEGORIAS -->
   <section>
-    <div class="section-label">03 — Categorias</div>
-    <h2>Interesse por categoria</h2>
-
-    <div class="chart-wrap">
-      <h3>Distribuição por eixo temático — 354 menções totais</h3>
-      <div class="bar-chart">
-        <div class="bar-row">
-          <div class="bar-label">Idiomas</div>
-          <div class="bar-track"><div class="bar-fill c1" style="width:100%"></div></div>
-          <div class="bar-count">98</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Arte/Cultura</div>
-          <div class="bar-track"><div class="bar-fill c4" style="width:41%"></div></div>
-          <div class="bar-count">40</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Gestão e Neg.</div>
-          <div class="bar-track"><div class="bar-fill c2" style="width:34%"></div></div>
-          <div class="bar-count">33</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Programação</div>
-          <div class="bar-track"><div class="bar-fill c3" style="width:30%"></div></div>
-          <div class="bar-count">29</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Estética</div>
-          <div class="bar-track"><div class="bar-fill c8" style="width:27%"></div></div>
-          <div class="bar-count">26</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Prod. Cultural</div>
-          <div class="bar-track"><div class="bar-fill c5" style="width:26%"></div></div>
-          <div class="bar-count">25</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Alimentação</div>
-          <div class="bar-track"><div class="bar-fill c10" style="width:16%"></div></div>
-          <div class="bar-count">16</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Manutenção TI</div>
-          <div class="bar-track"><div class="bar-fill c6" style="width:14%"></div></div>
-          <div class="bar-count">14</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Cultura Maker</div>
-          <div class="bar-track"><div class="bar-fill highlight" style="width:7%"></div></div>
-          <div class="bar-count">7</div>
+    <div class="sec-eye"><span class="sec-num">03</span><span class="sec-tag st-both">Categorias</span></div>
+    <h2 class="sec-h">Interesse por categoria</h2>
+    <div class="chart-box">
+      <h3>Distribuição por eixo temático <span class="csub">354 menções totais</span></h3>
+      <div class="bchart">
+        <div class="brow"><div class="blabel">Idiomas</div><div class="btrack"><div class="bfill bf-rob" style="width:100%">27,7%</div></div><div class="bcount">98</div></div>
+        <div class="brow"><div class="blabel">Arte / Cultura</div><div class="btrack"><div class="bfill bf-purp" style="width:41%"></div></div><div class="bcount">40</div></div>
+        <div class="brow"><div class="blabel">Gestão e Negócios</div><div class="btrack"><div class="bfill bf-gest" style="width:34%">gestão</div></div><div class="bcount">33</div></div>
+        <div class="brow"><div class="blabel">Programação</div><div class="btrack"><div class="bfill bf-tech" style="width:30%">tech</div></div><div class="bcount">29</div></div>
+        <div class="brow"><div class="blabel">Estética</div><div class="btrack"><div class="bfill bf-gray" style="width:27%"></div></div><div class="bcount">26</div></div>
+        <div class="brow"><div class="blabel">Prod. Cultural</div><div class="btrack"><div class="bfill bf-blue2" style="width:26%"></div></div><div class="bcount">25</div></div>
+        <div class="brow"><div class="blabel">Alimentação</div><div class="btrack"><div class="bfill bf-warn" style="width:16%"></div></div><div class="bcount">16</div></div>
+        <div class="brow"><div class="blabel">Manutenção TI</div><div class="btrack"><div class="bfill bf-tech" style="width:14%"></div></div><div class="bcount">14</div></div>
+        <div class="brow">
+          <div class="blabel bld" style="color:var(--rob)">▶ Cultura Maker</div>
+          <div class="btrack"><div class="bfill bf-rob" style="width:7%"></div></div>
+          <div class="bcount">7</div>
         </div>
       </div>
     </div>
-
-    <div class="cards-2" style="margin-top:24px">
-      <div class="card green-border">
-        <span class="card-tag tag-green">Destaque positivo</span>
+    <div class="g2" style="margin-top:20px">
+      <div class="card">
+        <div class="card-stripe cs-gest"></div>
+        <span class="badge-sm bs-gest">Destaque</span>
         <h3>Idiomas são imbatíveis</h3>
-        <p>Com 98 menções (27,7% do total), idiomas — especialmente inglês (66) e espanhol (14) — são a demanda mais clara e consistente em todos os semestres. Libras (8) também aparece com força, mostrando sensibilidade para inclusão.</p>
+        <p>Com 98 menções (28% do total), especialmente inglês (66) e espanhol (14). Libras (8) também aparece com força, mostrando sensibilidade à inclusão.</p>
       </div>
-      <div class="card blue-border">
-        <span class="card-tag tag-blue">Cluster tech forte</span>
-        <h3>Tech é transversal</h3>
-        <p>Somando Programação (29) + Manutenção TI (14) + Informática (9) + Cultura Maker (7), o cluster tecnológico tem <strong>59 menções</strong> — tornando-se a 2ª maior categoria funcional. Robótica integra esse ecossistema.</p>
+      <div class="card">
+        <div class="card-stripe cs-tech"></div>
+        <span class="badge-sm bs-tech">Cluster tech</span>
+        <h3>Tech é transversal e robusto</h3>
+        <p>Programação (29) + Manutenção TI (14) + Informática (9) + Cultura Maker (7) = <strong>59 menções</strong> — 2ª maior categoria funcional. Robótica integra esse ecossistema.</p>
       </div>
     </div>
   </section>
 
-  <!-- SECÇÃO 4: PERFIL JOVENS -->
+  <!-- S4: PERFIL JOVENS -->
   <section>
-    <div class="section-label">04 — Quem são os jovens</div>
-    <h2>Perfil dos 135 adolescentes (15–17 anos)</h2>
-
-    <div class="cards-3">
-      <div class="card green-border">
-        <span class="card-tag tag-green">Aspiração profissional</span>
+    <div class="sec-eye"><span class="sec-num">04</span><span class="sec-tag st-both">Quem são os jovens</span></div>
+    <h2 class="sec-h">Perfil dos 135 adolescentes (15–17 anos)</h2>
+    <div class="g3">
+      <div class="card">
+        <div class="card-stripe cs-gest"></div>
+        <span class="badge-sm bs-gest">Aspiração</span>
         <h3>TI é o sonho tecnológico</h3>
-        <p>Quando perguntados sobre faculdade, TI/Tecnologia aparece 3 vezes como "T.I", 3 como "TI" e 3 como "Engenharia da Computação" — somando <strong>9 citações</strong> no top 5 geral, atrás apenas de Direito e Medicina.</p>
+        <p>Na faculdade desejada, TI/Tecnologia aparece 3× como "T.I", 3× como "TI" e 4× como "Eng. da Computação" — somando 10 citações no top 5, atrás só de Direito e Medicina.</p>
       </div>
-      <div class="card accent-border">
-        <span class="card-tag tag-red">Urgência</span>
-        <div class="big-num red">88%</div>
+      <div class="card">
+        <div class="card-stripe cs-rob"></div>
+        <span class="badge-sm bs-rob">Urgência</span>
+        <div class="bignum bn-rob">88%</div>
         <h3>Querem emprego rápido</h3>
-        <p>119 de 135 adolescentes têm muito interesse ou interesse em conseguir emprego ao sair da Despertar. A empregabilidade é critério decisivo para qualquer novo curso.</p>
+        <p>119 de 135 adolescentes têm muito interesse ou interesse em conseguir emprego ao sair da Despertar. Empregabilidade é critério decisivo para qualquer novo curso.</p>
       </div>
-      <div class="card warn-border">
-        <span class="card-tag tag-warn">Intenção de continuidade</span>
-        <div class="big-num" style="color:var(--warn)">45%</div>
+      <div class="card">
+        <div class="card-stripe cs-warn"></div>
+        <span class="badge-sm bs-warn">Continuidade</span>
+        <div class="bignum bn-warn">45%</div>
         <h3>Querem outro curso na Despertar</h3>
-        <p>61 dos adolescentes desejam fazer outro curso na própria Despertar — base concreta para expansão do portfólio, incluindo robótica como segundo passo.</p>
+        <p>61 adolescentes desejam fazer outro curso na própria Despertar — base concreta para expansão do portfólio, incluindo robótica como próximo passo.</p>
       </div>
     </div>
-
-    <div class="chart-wrap">
-      <h3>Cursos técnicos desejados pelos adolescentes (15–17 anos)</h3>
-      <div class="bar-chart">
-        <div class="bar-row">
-          <div class="bar-label">Fotografia</div>
-          <div class="bar-track"><div class="bar-fill c4" style="width:100%"></div></div>
-          <div class="bar-count">13</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Administração</div>
-          <div class="bar-track"><div class="bar-fill c2" style="width:62%"></div></div>
-          <div class="bar-count">8</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Programação</div>
-          <div class="bar-track"><div class="bar-fill c3" style="width:31%"></div></div>
-          <div class="bar-count">4</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Tecnologia</div>
-          <div class="bar-track"><div class="bar-fill c6" style="width:31%"></div></div>
-          <div class="bar-count">4</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Design</div>
-          <div class="bar-track"><div class="bar-fill c8" style="width:31%"></div></div>
-          <div class="bar-count">4</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Enfermagem</div>
-          <div class="bar-track"><div class="bar-fill c5" style="width:23%"></div></div>
-          <div class="bar-count">3</div>
-        </div>
+    <div class="chart-box">
+      <h3>Cursos técnicos desejados pelos adolescentes <span class="csub">15–17 anos · respostas válidas</span></h3>
+      <div class="bchart">
+        <div class="brow"><div class="blabel">Fotografia</div><div class="btrack"><div class="bfill bf-blue2" style="width:100%"></div></div><div class="bcount">13</div></div>
+        <div class="brow"><div class="blabel">Administração</div><div class="btrack"><div class="bfill bf-gest" style="width:62%">gestão</div></div><div class="bcount">8</div></div>
+        <div class="brow"><div class="blabel">Programação</div><div class="btrack"><div class="bfill bf-tech" style="width:31%">tech</div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Tecnologia</div><div class="btrack"><div class="bfill bf-tech" style="width:31%"></div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Design</div><div class="btrack"><div class="bfill bf-purp" style="width:31%"></div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Enfermagem</div><div class="btrack"><div class="bfill bf-gray" style="width:23%"></div></div><div class="bcount">3</div></div>
       </div>
     </div>
   </section>
 
-  <!-- SECÇÃO 5: FAMÍLIAS -->
+  <!-- S5: FAMÍLIAS -->
   <section>
-    <div class="section-label">05 — Voz das famílias</div>
-    <h2>O que as famílias esperam (75 respondentes)</h2>
-
-    <div class="cards-2">
-      <div class="card green-border">
-        <span class="card-tag tag-green">Prioridade #1 das famílias</span>
+    <div class="sec-eye"><span class="sec-num">05</span><span class="sec-tag st-gest">Voz das famílias</span></div>
+    <h2 class="sec-h">O que as 75 famílias esperam</h2>
+    <div class="g2">
+      <div class="card">
+        <div class="card-stripe cs-gest"></div>
+        <span class="badge-sm bs-gest">Prioridade #1</span>
         <h3>Habilidades para o trabalho</h3>
-        <p><strong>56 de 75 famílias</strong> esperam que o jovem desenvolva habilidades para o mundo do trabalho. Qualquer novo curso precisa ter esse apelo concreto e demonstrável.</p>
+        <p><strong>56 de 75 famílias</strong> esperam que o jovem desenvolva habilidades para o mundo do trabalho. Qualquer curso precisa ter esse apelo concreto e demonstrável.</p>
       </div>
-      <div class="card blue-border">
-        <span class="card-tag tag-blue">Prioridade #2 das famílias</span>
+      <div class="card">
+        <div class="card-stripe cs-tech"></div>
+        <span class="badge-sm bs-tech">Prioridade #2</span>
         <h3>Conteúdo técnico relevante</h3>
-        <p><strong>45 famílias</strong> citam conteúdos técnicos do curso. As famílias entendem valor quando veem um currículo sólido — robótica precisa de narrativa clara de empregabilidade.</p>
+        <p><strong>45 famílias</strong> citam conteúdos técnicos do curso escolhido. As famílias valorizam currículos sólidos — robótica precisa de narrativa clara de empregabilidade.</p>
       </div>
     </div>
-
-    <div class="chart-wrap">
+    <div class="chart-box">
       <h3>O que as famílias preferem que o jovem faça após a Despertar</h3>
-      <div class="bar-chart">
-        <div class="bar-row">
-          <div class="bar-label">Curso técnico/fac.</div>
-          <div class="bar-track"><div class="bar-fill c2" style="width:100%"></div></div>
-          <div class="bar-count">49</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Conseguir emprego</div>
-          <div class="bar-track"><div class="bar-fill c3" style="width:37%"></div></div>
-          <div class="bar-count">18</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Abrir negócio</div>
-          <div class="bar-track"><div class="bar-fill c5" style="width:8%"></div></div>
-          <div class="bar-count">4</div>
-        </div>
-        <div class="bar-row">
-          <div class="bar-label">Não tenho certeza</div>
-          <div class="bar-track"><div class="bar-fill gray" style="width:8%"></div></div>
-          <div class="bar-count">4</div>
-        </div>
+      <div class="bchart">
+        <div class="brow"><div class="blabel">Curso técnico / faculdade</div><div class="btrack"><div class="bfill bf-gest" style="width:100%">65%</div></div><div class="bcount">49</div></div>
+        <div class="brow"><div class="blabel">Conseguir emprego</div><div class="btrack"><div class="bfill bf-tech" style="width:37%">24%</div></div><div class="bcount">18</div></div>
+        <div class="brow"><div class="blabel">Abrir negócio</div><div class="btrack"><div class="bfill bf-warn" style="width:8%"></div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Não tenho certeza</div><div class="btrack"><div class="bfill bf-gray" style="width:8%"></div></div><div class="bcount">4</div></div>
       </div>
     </div>
-
-    <div class="insight">
-      <strong>Implicação direta:</strong> 65% das famílias priorizam continuidade de estudos (técnico ou faculdade). Um curso de robótica que funcione como <em>porta de entrada</em> para cursos técnicos em automação, mecatrônica ou sistemas — com certificação reconhecida — teria o apoio familiar necessário para ter boa adesão.
+    <div class="hl dark">
+      <strong>Implicação direta:</strong> 65% das famílias priorizam continuidade de estudos. Um curso de robótica que funcione como <em>porta de entrada</em> para técnicos em automação ou mecatrônica — com certificação reconhecida — teria o apoio familiar necessário para ter boa adesão.
     </div>
   </section>
 
-  <!-- SECÇÃO 6: SMADS -->
+  <!-- S6: SMADS -->
   <section>
-    <div class="section-label">06 — Consulta SMADS 2025</div>
-    <h2>Cursos mapeados pela SMADS: onde robótica se encaixa</h2>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Curso</th>
-          <th>Empregabilidade</th>
-          <th>Demanda</th>
-          <th>Conexão Estratégica</th>
-          <th>Eixo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Editor de Projeto Visual Gráfico</strong></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td>Prod. Cultural</td>
-        </tr>
-        <tr>
-          <td><strong>Editor de Vídeo</strong></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td>Prod. Cultural</td>
-        </tr>
-        <tr>
-          <td><strong>Inglês Básico / Intermediário</strong></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge med">MÉDIA</span></td>
-          <td>Des. Educacional</td>
-        </tr>
-        <tr>
-          <td><strong>Desenvolvedor de Jogos</strong></td>
-          <td><span class="badge low">BAIXA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td>Informação/Comunic.</td>
-        </tr>
-        <tr>
-          <td><strong>Assistente de Logística</strong></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge low">BAIXA</span></td>
-          <td>Gestão e Negócios</td>
-        </tr>
-        <tr>
-          <td><strong>Editor de Animação</strong></td>
-          <td><span class="badge med">MÉDIA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td>Prod. Cultural</td>
-        </tr>
-        <tr>
-          <td><strong>Fotógrafo</strong></td>
-          <td><span class="badge low">BAIXA formal</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td><span class="badge med">MÉDIA</span></td>
-          <td>Prod. Cultural</td>
-        </tr>
-        <tr>
-          <td><strong>Energias Renováveis</strong></td>
-          <td><span class="badge med">MÉDIA</span></td>
-          <td><span class="badge med">MÉDIA</span></td>
-          <td><span class="badge high">ALTA</span></td>
-          <td>Controle Industrial</td>
-        </tr>
-        <tr style="background: #fdf3e2;">
-          <td><strong>🤖 Robótica (não listada)</strong></td>
-          <td><span class="badge med">MÉDIA-BAIXA</span></td>
-          <td><span class="badge low">BAIXA direta</span></td>
-          <td><span class="badge med">MÉDIA</span></td>
-          <td>Cultura Maker</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="insight">
-      <strong>Nota:</strong> Robótica não foi incluída na lista formal enviada à SMADS, o que já é um sinal de priorização. A SMADS classificou "Desenvolvedor de Jogos" como empregabilidade baixa, mas demanda e conexão altas — mesma lógica se aplicaria à robótica. O documento sugere que <em>Eletricista de Sistemas de Energias Renováveis</em> seria a ponte mais próxima entre tecnologia aplicada e mercado formal.
+    <div class="sec-eye"><span class="sec-num">06</span><span class="sec-tag st-both">Consulta SMADS 2025</span></div>
+    <h2 class="sec-h">Cursos mapeados pela SMADS: onde robótica se encaixa</h2>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Curso</th><th>Empregabilidade</th><th>Demanda</th><th>Conexão estratégica</th><th>Eixo</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Editor de Projeto Visual Gráfico</strong></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td>Prod. Cultural</td></tr>
+          <tr><td><strong>Editor de Vídeo</strong></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td>Prod. Cultural</td></tr>
+          <tr><td><strong>Inglês Básico / Intermediário</strong></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-m">MÉDIA</span></td><td>Des. Educacional</td></tr>
+          <tr><td><strong>Desenvolvedor de Jogos</strong></td><td><span class="bdg bdg-l">BAIXA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td>Informação/Com.</td></tr>
+          <tr><td><strong>Assistente de Logística</strong></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-l">BAIXA</span></td><td>Gestão e Neg.</td></tr>
+          <tr><td><strong>Editor de Animação</strong></td><td><span class="bdg bdg-m">MÉDIA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td>Prod. Cultural</td></tr>
+          <tr><td><strong>Fotógrafo</strong></td><td><span class="bdg bdg-l">BAIXA formal</span></td><td><span class="bdg bdg-h">ALTA</span></td><td><span class="bdg bdg-m">MÉDIA</span></td><td>Prod. Cultural</td></tr>
+          <tr><td><strong>Energias Renováveis</strong></td><td><span class="bdg bdg-m">MÉDIA</span></td><td><span class="bdg bdg-m">MÉDIA</span></td><td><span class="bdg bdg-h">ALTA</span></td><td>Controle Ind.</td></tr>
+          <tr class="row-rob"><td><strong>🤖 Robótica (não listada)</strong></td><td><span class="bdg bdg-m">MÉDIA-BAIXA</span></td><td><span class="bdg bdg-l">BAIXA direta</span></td><td><span class="bdg bdg-m">MÉDIA</span></td><td>Cultura Maker</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hl warn">
+      <strong>Nota:</strong> Robótica não foi incluída na lista formal enviada à SMADS — um sinal de priorização interna. A SMADS classificou "Desenvolvedor de Jogos" como empregabilidade baixa mas demanda e conexão altas — mesma lógica se aplicaria à robótica.
     </div>
   </section>
 
-  <!-- SECÇÃO 7: RECOMENDAÇÕES -->
+  <!-- S7: RECOMENDAÇÕES GERAIS -->
   <section>
-    <div class="section-label">07 — Recomendações finais</div>
-    <h2>O que implantar e o que aguardar</h2>
+    <div class="sec-eye"><span class="sec-num">07</span><span class="sec-tag st-both">Recomendações gerais</span></div>
+    <h2 class="sec-h">O que implantar, o que aguardar</h2>
 
-    <h3 style="font-family: 'Syne', sans-serif; font-size:1rem; margin-bottom:12px; color: var(--accent2);">✅ IMPLANTAR AGORA — Alta demanda + empregabilidade comprovada</h3>
+    <p style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--gestao);margin-bottom:10px;">✅ IMPLANTAR AGORA — Alta demanda + empregabilidade comprovada</p>
     <div class="reco-grid">
-      <div class="reco-card go">
-        <div class="reco-rank">1</div>
-        <h4>Inglês (básico + intermediário)</h4>
-        <p>Demanda esmagadora: 66 menções (19% do total). Alta empregabilidade formal. Conexão direta com mercado de trabalho e acesso a cursos superiores. Prioridade absoluta.</p>
-      </div>
-      <div class="reco-card go">
-        <div class="reco-rank">2</div>
-        <h4>Design Gráfico / Edição de Vídeo</h4>
-        <p>Demanda alta (6+6 menções), empregabilidade alta e conexão estratégica alta segundo SMADS. Forte apelo entre adolescentes ligados a criação de conteúdo digital.</p>
-      </div>
-      <div class="reco-card go">
-        <div class="reco-rank">3</div>
-        <h4>Desenvolvimento de Jogos</h4>
-        <p>12 menções — maior demanda tech específica. Alta conexão estratégica. Porta de entrada para programação e carreira em TI, que é o sonho de faculdade de muitos adolescentes.</p>
-      </div>
-      <div class="reco-card go">
-        <div class="reco-rank">4</div>
-        <h4>Fotografia Profissional</h4>
-        <p>13 menções entre adolescentes para técnico (maior da categoria). Empregabilidade via empreendedorismo. Alta demanda comprovada nos dados dos jovens.</p>
-      </div>
-      <div class="reco-card go">
-        <div class="reco-rank">5</div>
-        <h4>Música (prática + produção)</h4>
-        <p>18 menções — 2ª maior demanda geral. Pode ser estruturado com trilha de produção musical digital para conectar com mercado e empreendedorismo.</p>
-      </div>
+      <div class="rc go"><div class="rc-rank">1</div><h4>Inglês (básico + intermediário)</h4><p>66 menções (19%). Alta empregabilidade formal. Conexão direta com mercado de trabalho e acesso ao ensino superior. Prioridade absoluta.</p></div>
+      <div class="rc go"><div class="rc-rank">2</div><h4>Design Gráfico / Edição de Vídeo</h4><p>6+6 menções, empregabilidade e conexão estratégica altas segundo SMADS. Forte apelo entre adolescentes de criação de conteúdo.</p></div>
+      <div class="rc go"><div class="rc-rank">3</div><h4>Desenvolvimento de Jogos</h4><p>12 menções — maior demanda tech específica. Alta conexão estratégica e porta de entrada para carreira em TI.</p></div>
+      <div class="rc go"><div class="rc-rank">4</div><h4>Fotografia Profissional</h4><p>Curso técnico mais desejado por adolescentes (13 menções). Empregabilidade via empreendedorismo.</p></div>
+      <div class="rc go"><div class="rc-rank">5</div><h4>Música / Produção Musical</h4><p>18 menções — 2ª maior demanda geral. Estruturar com trilha de produção digital conecta com mercado.</p></div>
     </div>
 
-    <h3 style="font-family: 'Syne', sans-serif; font-size:1rem; margin: 32px 0 12px; color: var(--warn);">🟡 CONSIDERAR — Demanda média ou condicionada</h3>
+    <p style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--warn);margin:28px 0 10px;">🟡 CONSIDERAR — Demanda média ou condicionada</p>
     <div class="reco-grid">
-      <div class="reco-card maybe">
-        <div class="reco-rank">6</div>
-        <h4>Empreendedorismo Digital</h4>
-        <p>6 menções + forte desejo das famílias por negócio próprio. Pode ser ofertado como módulo transversal integrado a outros cursos.</p>
-      </div>
-      <div class="reco-card maybe">
-        <div class="reco-rank">7</div>
-        <h4>Marketing Digital</h4>
-        <p>6 menções, alta empregabilidade no mercado atual. Complementa design gráfico e produção de conteúdo. Fácil integração com estágio/emprego imediato.</p>
-      </div>
-      <div class="reco-card maybe">
-        <div class="reco-rank">8</div>
-        <h4>🤖 Robótica (módulo integrado)</h4>
-        <p>7 menções, sempre em conjunto com programação e jogos. Implantar como módulo dentro de Cultura Maker ou trilha tech — não como curso isolado. Avaliar demanda em 2026.1.</p>
-      </div>
-      <div class="reco-card maybe">
-        <div class="reco-rank">9</div>
-        <h4>Libras</h4>
-        <p>8 menções com perfil de demanda diferenciado — conecta com valores de inclusão da instituição. Considerar como curso acessível de curta duração.</p>
-      </div>
+      <div class="rc maybe"><div class="rc-rank">6</div><h4>Empreendedorismo Digital</h4><p>6 menções + forte desejo das famílias por negócio próprio. Pode ser módulo transversal integrado.</p></div>
+      <div class="rc maybe"><div class="rc-rank">7</div><h4>Marketing Digital</h4><p>6 menções, alta empregabilidade. Complementa design e produção de conteúdo.</p></div>
+      <div class="rc maybe"><div class="rc-rank">8</div><h4>🤖 Robótica (módulo integrado)</h4><p>7 menções, sempre junto com programação e jogos. Implantar dentro de trilha tech — não isolada. Ver aba "Contexto dos eixos" para análise aprofundada.</p></div>
+      <div class="rc maybe"><div class="rc-rank">9</div><h4>Libras</h4><p>8 menções. Conecta com valores de inclusão. Considerar como curso acessível de curta duração.</p></div>
     </div>
 
-    <h3 style="font-family: 'Syne', sans-serif; font-size:1rem; margin: 32px 0 12px; color: var(--accent);">❌ AGUARDAR OU REFORMULAR — Baixa empregabilidade formal ou demanda insuficiente</h3>
+    <p style="font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--rob);margin:28px 0 10px;">❌ AGUARDAR — Demanda insuficiente ou empregabilidade baixa no perfil atendido</p>
     <div class="reco-grid">
-      <div class="reco-card no">
-        <div class="reco-rank">—</div>
-        <h4>Barbearia / Estética (isolados)</h4>
-        <p>7 e 6 menções respectivamente, mas perfil de público difere dos adolescentes. Avaliar se há demanda específica no turno adolescente antes de implantar.</p>
-      </div>
-      <div class="reco-card no">
-        <div class="reco-rank">—</div>
-        <h4>Robótica como curso standalone</h4>
-        <p>7 menções não justificam estrutura, equipamentos e docente dedicados. Sem empregabilidade formal clara no perfil socioeconômico da comunidade atendida.</p>
-      </div>
+      <div class="rc no"><div class="rc-rank">—</div><h4>Barbearia / Estética (isolados)</h4><p>7 e 6 menções. Perfil de público difere dos adolescentes. Avaliar turno específico antes de implantar.</p></div>
+      <div class="rc no"><div class="rc-rank">—</div><h4>Robótica como curso standalone</h4><p>7 menções não justificam estrutura, equipamentos e docente dedicados ainda. Pilote como módulo primeiro.</p></div>
     </div>
   </section>
 
-  <!-- SECÇÃO 8: SÍNTESE -->
+  <!-- S8: SÍNTESE -->
   <section>
-    <div class="section-label">08 — Síntese executiva</div>
-    <h2>Principais achados em 5 pontos</h2>
+    <div class="sec-eye"><span class="sec-num">08</span><span class="sec-tag st-both">Síntese executiva</span></div>
+    <h2 class="sec-h">Principais achados em 6 pontos</h2>
+    <div class="g2">
+      <div class="card"><div class="card-stripe cs-gest"></div><span class="badge-sm bs-gest">Achado 1</span><h3>Inglês é a demanda #1 indiscutível</h3><p>Com 66 menções e 3× mais demanda do que qualquer outro curso, inglês deve ser ofertado em múltiplos níveis e turnos. É a intervenção de maior impacto possível.</p></div>
+      <div class="card"><div class="card-stripe cs-tech"></div><span class="badge-sm bs-tech">Achado 2</span><h3>Tech é forte, mas fragmentada</h3><p>Os jovens querem TI — mas expressam em palavras diferentes (jogos, programação, robótica, informática). Uma trilha tecnológica coesa seria mais eficaz do que cursos isolados.</p></div>
+      <div class="card"><div class="card-stripe cs-rob"></div><span class="badge-sm bs-rob">Achado 3</span><h3>Empregabilidade é o critério-rei</h3><p>88% dos adolescentes e 73% das famílias priorizam emprego ou continuidade de estudos. Todo curso novo precisa ter rota de empregabilidade clara e comunicada.</p></div>
+      <div class="card"><div class="card-stripe cs-warn"></div><span class="badge-sm bs-warn">Achado 4</span><h3>Robótica: potencial latente</h3><p>Sempre associada a programação e games — não como fim em si. Implantar dentro de uma trilha maker-tech é mais inteligente e terá maior adesão real.</p></div>
+      <div class="card"><div class="card-stripe cs-gest"></div><span class="badge-sm bs-gest">Achado 5</span><h3>45% querem mais cursos na Despertar</h3><p>Há base consolidada para expansão. Construir trilha progressiva (básico → avançado → técnico) é a estratégia de retenção e impacto mais promissora.</p></div>
+      <div class="card"><div class="card-stripe cs-tech"></div><span class="badge-sm bs-tech">Achado 6</span><h3>Produção cultural digital tem tudo</h3><p>Design, vídeo, fotografia e música somam alta demanda + empregabilidade via empreendedorismo + conexão com identidade cultural da comunidade.</p></div>
+    </div>
+  </section>
 
-    <div class="cards-2">
-      <div class="card green-border">
-        <span class="card-tag tag-green">Achado 1</span>
-        <h3>Inglês é a demanda #1 indiscutível</h3>
-        <p>Com 66 menções e quase 3x mais demanda do que qualquer outro curso, inglês deve ser ofertado em múltiplos níveis e turnos. É a intervenção de maior impacto possível.</p>
+</div><!-- /main -->
+</div><!-- /tab-panel visao-geral -->
+
+
+<!-- ════════════════════════════════════════════════
+     PAINEL 2 — CONTEXTO DOS EIXOS
+════════════════════════════════════════════════ -->
+<div id="contexto" class="tab-panel">
+<div class="main">
+
+  <!-- VEREDICTO DUPLO -->
+  <div class="verdict-split" style="margin-top:52px">
+    <div class="vs-side">
+      <div class="vs-eye">Sem o contexto dos eixos</div>
+      <h2>Robótica parece fraca: apenas 2% da demanda geral</h2>
+      <p>Olhando para o universo total de 354 respostas, a robótica com 7 menções parece tímida — empatada com barbearia e fotografia. Essa leitura isolada não faz justiça ao potencial real do curso.</p>
+    </div>
+    <div class="vs-side">
+      <div class="vs-eye">Com o contexto dos eixos estratégicos</div>
+      <h2>Robótica é a 3ª maior demanda dentro do eixo tech</h2>
+      <p>Dentro do cluster tecnológico (59 menções), robótica ocupa o 3º lugar — atrás só de Desenvolvimento de Jogos (12) e Informática (9). Seu público natural são os <strong>94 adolescentes já em cursos tech</strong>, não a escola toda.</p>
+    </div>
+  </div>
+
+  <!-- S1: CONTEXTO DOS EIXOS -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">01</span><span class="sec-tag st-both">Contexto estratégico</span></div>
+    <h2 class="sec-h">O que cada eixo representa nos dados</h2>
+    <div class="axis-pair">
+      <div class="axis-card tech">
+        <h3>⚙️ Eixo Tecnologia</h3>
+        <div class="axis-big">94</div>
+        <p>adolescentes matriculados (70% do total de 15–17 anos) em Programação Web, Dispositivos Móveis, Despertar Tec, Montagem de Computadores e Informática Básica.</p>
       </div>
-      <div class="card blue-border">
-        <span class="card-tag tag-blue">Achado 2</span>
-        <h3>Tech é forte, mas fragmentada</h3>
-        <p>Os jovens querem TI — mas expressam isso em palavras diferentes (jogos, programação, robótica, informática). Consolidar numa trilha tecnológica coesa seria mais eficaz do que cursos isolados.</p>
+      <div class="axis-card gestao">
+        <h3>📊 Eixo Gestão</h3>
+        <div class="axis-big">41</div>
+        <p>adolescentes matriculados (30% do total) em Assistente Administrativo e Assistente de RH — com forte demanda por continuidade em Administração e RH.</p>
       </div>
-      <div class="card accent-border">
-        <span class="card-tag tag-red">Achado 3</span>
-        <h3>Empregabilidade é o critério-rei</h3>
-        <p>88% dos adolescentes e 73% das famílias priorizam emprego ou continuidade de estudos. Todo curso novo precisa ter rota de empregabilidade clara e comunicada.</p>
+    </div>
+    <div class="g2">
+      <div class="card">
+        <div class="card-stripe cs-tech"></div>
+        <span class="badge-sm bs-tech">Eixo tech — depois da Despertar</span>
+        <h3>Jovens tech apontam para TI e Engenharia</h3>
+        <p>Dos 94 adolescentes em cursos tech, os cursos de faculdade mais desejados são <strong>Eng. da Computação (4)</strong>, <strong>T.I. (4)</strong> e <strong>Programação (2)</strong>. Empregos: Programador Júnior, Auxiliar em TI, Analista de Sistemas. Trilha clara de progressão técnica a explorar.</p>
       </div>
-      <div class="card warn-border">
-        <span class="card-tag tag-warn">Achado 4</span>
-        <h3>Robótica: potencial latente</h3>
-        <p>A robótica aparece sempre associada a programação e games — não como fim em si. Implantar dentro de uma trilha maker-tech é mais inteligente e teria maior adesão real.</p>
+      <div class="card">
+        <div class="card-stripe cs-gest"></div>
+        <span class="badge-sm bs-gest">Eixo gestão — depois da Despertar</span>
+        <h3>Jovens gestão buscam Admin e RH</h3>
+        <p>Os 41 adolescentes de gestão convergem para Administração (8 no técnico) e cargos de Assistente Administrativo. Demanda homogênea e voltada ao mercado formal imediato — base sólida de empregabilidade de curto prazo.</p>
       </div>
-      <div class="card green-border">
-        <span class="card-tag tag-green">Achado 5</span>
-        <h3>45% dos jovens querem mais cursos na Despertar</h3>
-        <p>Há base consolidada para expansão. Construir uma trilha progressiva (básico → avançado → técnico) é a estratégia de retenção e impacto mais promissora.</p>
+    </div>
+    <div class="hl dark">
+      <strong>Ponto de convergência:</strong> 88% dos adolescentes dos dois eixos declararam muito interesse ou interesse em conseguir emprego ao sair da Despertar. Qualquer novo curso — incluindo robótica — precisa ter rota de empregabilidade clara para ambos os públicos.
+    </div>
+  </section>
+
+  <!-- S2: ROBÓTICA NO EIXO TECH -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">02</span><span class="sec-tag st-tech">Eixo Tecnologia</span></div>
+    <h2 class="sec-h">Robótica dentro do eixo tecnológico</h2>
+    <div class="g3">
+      <div class="card">
+        <div class="card-stripe cs-tech"></div>
+        <span class="badge-sm bs-tech">Ranking interno</span>
+        <div class="bignum bn-tech">3ª</div>
+        <h3>Posição no cluster tech</h3>
+        <p>Dentro das 59 menções tech, robótica é a <strong>3ª mais desejada</strong> — supera Manutenção de Hardware (4 cada), Dev. de Aplicativos (3) e Gestão de TI (2).</p>
       </div>
-      <div class="card blue-border">
-        <span class="card-tag tag-blue">Achado 6</span>
-        <h3>Produção cultural digital tem tudo</h3>
-        <p>Design, vídeo, fotografia e música somam alta demanda + empregabilidade via empreendedorismo + conexão com identidade cultural da comunidade. Eixo estratégico subestimado.</p>
+      <div class="card">
+        <div class="card-stripe cs-rob"></div>
+        <span class="badge-sm bs-rob">Característica-chave</span>
+        <div class="bignum bn-rob">100%</div>
+        <h3>Sempre associada a tech</h3>
+        <p>Todas as 7 menções aparecem junto com programação, jogos ou informática — nunca isolada. O interesse é por <em>tecnologia criativa e aplicada</em>.</p>
+      </div>
+      <div class="card">
+        <div class="card-stripe cs-warn"></div>
+        <span class="badge-sm bs-warn">Oportunidade</span>
+        <div class="bignum bn-warn">94</div>
+        <h3>Público imediato potencial</h3>
+        <p>Os 94 adolescentes já em cursos tech são o público natural de um módulo de robótica. Não é necessário criar nova demanda — ela existe e já está matriculada.</p>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Ranking de demanda dentro do eixo Tecnologia <span class="csub">59 menções totais</span></h3>
+      <div class="bchart">
+        <div class="brow"><div class="blabel bld">Desenvolvimento de Jogos</div><div class="btrack"><div class="bfill bf-tech" style="width:100%">🏆 1º</div></div><div class="bcount">12</div></div>
+        <div class="brow"><div class="blabel bld">Informática</div><div class="btrack"><div class="bfill bf-blue2" style="width:75%">2º</div></div><div class="bcount">9</div></div>
+        <div class="brow"><div class="blabel bld" style="color:var(--rob)">▶ Robótica</div><div class="btrack"><div class="bfill bf-rob" style="width:58%">3º</div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Outros Programação</div><div class="btrack"><div class="bfill bf-blue2" style="width:58%">4º</div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Manut. Celulares</div><div class="btrack"><div class="bfill bf-gray" style="width:33%"></div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Manut. Computadores</div><div class="btrack"><div class="bfill bf-gray" style="width:33%"></div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Manut. Notebooks</div><div class="btrack"><div class="bfill bf-gray" style="width:33%"></div></div><div class="bcount">4</div></div>
+        <div class="brow"><div class="blabel">Dev. Aplicativos</div><div class="btrack"><div class="bfill bf-blue2" style="width:25%"></div></div><div class="bcount">3</div></div>
+        <div class="brow"><div class="blabel">Gestão de TI</div><div class="btrack"><div class="bfill bf-blue2" style="width:17%"></div></div><div class="bcount">2</div></div>
+        <div class="brow"><div class="blabel">Programação 3D</div><div class="btrack"><div class="bfill bf-purp" style="width:17%"></div></div><div class="bcount">2</div></div>
+      </div>
+    </div>
+    <div class="hl tech">
+      <strong>Trilha Maker-Tech:</strong> Robótica, Jogos Digitais e Informática formam um trio naturalmente complementar. A progressão didática seria: Informática (base) → Programação/Jogos (núcleo) → Robótica (aplicação avançada). Essa trilha tem demanda real nos dados e coerência pedagógica.
+    </div>
+  </section>
+
+  <!-- S3: DEMANDA COMPARADA -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">03</span><span class="sec-tag st-both">Ambos os eixos</span></div>
+    <h2 class="sec-h">Demanda comparada: tech vs. gestão</h2>
+    <div class="chart-box">
+      <h3>Todos os cursos desejados nos eixos Tecnologia + Gestão <span class="csub">101 menções totais</span></h3>
+      <div class="bchart">
+        <div class="bsep">── Eixo Tecnologia</div>
+        <div class="brow"><div class="blabel">Dev. de Jogos</div><div class="btrack"><div class="bfill bf-tech" style="width:100%">tech</div></div><div class="bcount">12</div></div>
+        <div class="brow"><div class="blabel">Informática</div><div class="btrack"><div class="bfill bf-tech" style="width:75%"></div></div><div class="bcount">9</div></div>
+        <div class="brow"><div class="blabel bld" style="color:var(--rob)">▶ Robótica</div><div class="btrack"><div class="bfill bf-rob" style="width:58%"></div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Outros Programação</div><div class="btrack"><div class="bfill bf-tech" style="width:58%"></div></div><div class="bcount">7</div></div>
+        <div class="brow"><div class="blabel">Manut. Hardware (×3)</div><div class="btrack"><div class="bfill bf-tech" style="width:33%"></div></div><div class="bcount">4 cada</div></div>
+        <div class="brow"><div class="blabel">Dev. Aplicativos</div><div class="btrack"><div class="bfill bf-tech" style="width:25%"></div></div><div class="bcount">3</div></div>
+        <div class="brow"><div class="blabel">Gestão de TI</div><div class="btrack"><div class="bfill bf-tech" style="width:17%"></div></div><div class="bcount">2</div></div>
+        <div class="bsep">── Eixo Gestão</div>
+        <div class="brow"><div class="blabel">Empreendedorismo</div><div class="btrack"><div class="bfill bf-gest" style="width:50%">gestão</div></div><div class="bcount">6</div></div>
+        <div class="brow"><div class="blabel">Recursos Humanos</div><div class="btrack"><div class="bfill bf-gest" style="width:50%"></div></div><div class="bcount">6</div></div>
+        <div class="brow"><div class="blabel">Marketing Digital</div><div class="btrack"><div class="bfill bf-teal" style="width:50%">tech+gestão</div></div><div class="bcount">6</div></div>
+        <div class="brow"><div class="blabel">Administração</div><div class="btrack"><div class="bfill bf-gest" style="width:42%"></div></div><div class="bcount">5</div></div>
+        <div class="brow"><div class="blabel">Logística</div><div class="btrack"><div class="bfill bf-gest" style="width:25%"></div></div><div class="bcount">3</div></div>
+        <div class="brow"><div class="blabel">Educação Financeira</div><div class="btrack"><div class="bfill bf-gest" style="width:25%"></div></div><div class="bcount">3</div></div>
+      </div>
+    </div>
+    <div class="g2" style="margin-top:20px">
+      <div class="card"><div class="card-stripe cs-tech"></div><span class="badge-sm bs-tech">Insight tech</span><h3>Tech tem mais demanda, mas dispersa</h3><p>59 menções em 14 subcategorias distintas. Os jovens sabem que querem tecnologia, mas ainda mapeiam qual caminho. Robótica pode funcionar como <em>elemento integrador</em> dessa curiosidade fragmentada.</p></div>
+      <div class="card"><div class="card-stripe cs-gest"></div><span class="badge-sm bs-gest">Insight gestão</span><h3>Gestão tem demanda menor, mais focada</h3><p>42 menções em 10 subcategorias. <strong>Marketing Digital (6)</strong> aparece como ponte natural entre gestão e tecnologia — e pode ser um ponto de contato com robótica via automação de processos.</p></div>
+    </div>
+  </section>
+
+  <!-- S4: PERFIL JOVENS NO CONTEXTO -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">04</span><span class="sec-tag st-both">Perfil contextualizado</span></div>
+    <h2 class="sec-h">O que os adolescentes precisam desenvolver</h2>
+    <div class="g3">
+      <div class="card">
+        <div class="card-stripe cs-tech"></div>
+        <span class="badge-sm bs-tech">Autoavaliação tech</span>
+        <h3>Tecnologia: maioria se sente preparada</h3>
+        <p>82 de 135 adolescentes se avaliam "Preparados" em tecnologia; 38 se sentem "Nada preparados". Há base técnica para absorver robótica sem partir do zero.</p>
+      </div>
+      <div class="card">
+        <div class="card-stripe cs-warn"></div>
+        <span class="badge-sm bs-warn">Gap identificado</span>
+        <h3>Raciocínio lógico é o gap real</h3>
+        <p><strong>50 adolescentes</strong> (37%) se sentem "Nada preparados" em raciocínio lógico. Robótica, com sua lógica de programação e resolução de problemas, ataca diretamente esse déficit crítico para o mercado tech.</p>
+      </div>
+      <div class="card">
+        <div class="card-stripe cs-gest"></div>
+        <span class="badge-sm bs-gest">Soft skill-chave</span>
+        <h3>Comunicação é a mais desejada</h3>
+        <p>Entre os alunos tech, comunicação aparece em <strong>8 de 20 respostas</strong> sobre o que querem desenvolver. Projetos de robótica em equipe são reconhecidamente eficazes para desenvolver comunicação e trabalho em grupo.</p>
+      </div>
+    </div>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Competência</th><th>Preparado</th><th>Nada preparado</th><th>Nível do gap</th><th>Robótica contribui?</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tecnologias</strong></td><td><span class="bdg bdg-h">82 (61%)</span></td><td><span class="bdg bdg-l">38 (28%)</span></td><td><span class="bdg bdg-m">Médio</span></td><td>✅ Diretamente</td></tr>
+          <tr class="row-rob"><td><strong>Raciocínio Lógico</strong></td><td><span class="bdg bdg-m">72 (53%)</span></td><td><span class="bdg bdg-l">50 (37%)</span></td><td><span class="bdg bdg-l">Alto</span></td><td>✅ Muito diretamente</td></tr>
+          <tr><td><strong>Comunicação</strong></td><td>—</td><td>—</td><td><span class="bdg bdg-l">Percebido</span></td><td>✅ Via projetos em equipe</td></tr>
+          <tr><td><strong>Mercado de Trabalho</strong></td><td>—</td><td>—</td><td><span class="bdg bdg-m">Médio</span></td><td>⚠️ Indiretamente</td></tr>
+          <tr><td><strong>Criatividade</strong></td><td>—</td><td>—</td><td><span class="bdg bdg-m">Médio</span></td><td>✅ Projetos hands-on</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hl tech">
+      <strong>Argumento pedagógico:</strong> O maior gap auto-percebido é raciocínio lógico (37% despreparados). Robótica — com lógica de programação, sequenciamento e depuração de erros — é uma das metodologias mais eficazes para desenvolver essa competência. Isso dá ao curso justificativa pedagógica sólida, além do apelo pelo interesse declarado.
+    </div>
+  </section>
+
+  <!-- S5: MATRIZ DECISÓRIA -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">05</span><span class="sec-tag st-rob">Posicionamento estratégico</span></div>
+    <h2 class="sec-h">Onde a robótica está na matriz decisória</h2>
+    <div class="matrix-wrap">
+      <h3>Cursos × Empregabilidade formal × Demanda expressa nos dados</h3>
+      <div class="matrix">
+        <div class="mat-y">Empregabilidade formal →</div>
+        <div class="mcell mc-hh" style="grid-column:2;grid-row:1">
+          <div class="mc-lbl">Alta empregabilidade · Alta demanda</div>
+          <div class="mc-item"><span class="mc-dot mcd-gest"></span>Design Gráfico / Edição de Vídeo</div>
+          <div class="mc-item"><span class="mc-dot mcd-gest"></span>Inglês</div>
+          <div class="mc-item"><span class="mc-dot mcd-gest"></span>Marketing Digital</div>
+          <div class="mc-item"><span class="mc-dot mcd-gest"></span>Assistente Administrativo</div>
+        </div>
+        <div class="mcell mc-hl" style="grid-column:3;grid-row:1">
+          <div class="mc-lbl">Alta empregabilidade · Baixa demanda</div>
+          <div class="mc-item"><span class="mc-dot mcd-warn"></span>Logística</div>
+          <div class="mc-item"><span class="mc-dot mcd-warn"></span>Recepcionista</div>
+          <div class="mc-item"><span class="mc-dot mcd-warn"></span>Banco de Dados</div>
+        </div>
+        <div class="mcell mc-lh" style="grid-column:2;grid-row:2">
+          <div class="mc-lbl">Empreendedorismo · Alta demanda</div>
+          <div class="mc-item"><span class="mc-dot mcd-tech"></span>Dev. de Jogos Digitais</div>
+          <div class="mc-item"><span class="mc-dot mcd-tech"></span>Fotografia</div>
+          <div class="mc-item"><span class="mc-dot mcd-tech"></span>Música / Prod. Cultural</div>
+          <div class="mc-item"><span class="mc-dot mcd-rob" style="border:1.5px solid var(--rob)"></span><strong>🤖 Robótica ← está aqui</strong></div>
+        </div>
+        <div class="mcell mc-ll" style="grid-column:3;grid-row:2">
+          <div class="mc-lbl">Baixa empregabilidade · Baixa demanda</div>
+          <div class="mc-item"><span class="mc-dot mcd-gray"></span>Agente Socioambiental</div>
+          <div class="mc-item"><span class="mc-dot mcd-gray"></span>Recursos Hídricos</div>
+        </div>
+        <div class="mat-x" style="grid-column:2/4;grid-row:3">
+          <span>← Demanda alta</span>
+          <span>Demanda baixa →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbl-scroll" style="margin-top:20px">
+      <table>
+        <thead><tr><th>Curso</th><th>Demanda</th><th>Empregabilidade</th><th>Conexão estratégica</th><th>Eixo Despertar</th><th>Relação com robótica</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Desenvolvimento de Jogos</strong></td><td><span class="bdg bdg-h">Alta (12)</span></td><td><span class="bdg bdg-m">Média</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-t">Tech</span></td><td>Complementar — mesma trilha</td></tr>
+          <tr><td><strong>Informática Básica</strong></td><td><span class="bdg bdg-h">Alta (9)</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-m">Média</span></td><td><span class="bdg bdg-t">Tech</span></td><td>Pré-requisito para robótica</td></tr>
+          <tr class="row-rob"><td><strong>🤖 Robótica</strong></td><td><span class="bdg bdg-m">Média (7)</span></td><td><span class="bdg bdg-m">Crescente</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-t">Tech</span></td><td>—</td></tr>
+          <tr><td><strong>Marketing Digital</strong></td><td><span class="bdg bdg-m">Média (6)</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-g">Gestão</span></td><td>Ponte gestão → tech</td></tr>
+          <tr><td><strong>Empreendedorismo</strong></td><td><span class="bdg bdg-m">Média (6)</span></td><td><span class="bdg bdg-m">Via negócio</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-g">Gestão</span></td><td>Contexto de aplicação</td></tr>
+          <tr><td><strong>Gestão de TI</strong></td><td><span class="bdg bdg-l">Baixa (2)</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-h">Alta</span></td><td><span class="bdg bdg-t">Tech+Gestão</span></td><td>Progressão natural pós-robótica</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="hl rob">
+      <strong>Posição estratégica:</strong> Robótica está no mesmo quadrante de Desenvolvimento de Jogos — que a SMADS considera de alta conexão estratégica. A diferença é que robótica tem potencial de migrar para empregabilidade formal conforme o mercado de automação e manufatura 4.0 avança. A tendência dos próximos 5 anos é de crescimento claro de vagas nesse setor.
+    </div>
+  </section>
+
+  <!-- S6: ROADMAP -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">06</span><span class="sec-tag st-rob">Proposta de implantação</span></div>
+    <h2 class="sec-h">Roadmap de implantação em 3 fases</h2>
+    <div class="roadmap">
+      <div class="rm-step">
+        <div class="rm-num">1</div>
+        <div class="rm-period">2025.2 → Agora</div>
+        <h4>Consolidar a base tech existente</h4>
+        <ul>
+          <li>Garantir qualidade nos cursos Despertar Tec, Programação Web e Dispositivos Móveis</li>
+          <li>Mapear quais dos 94 alunos tech têm maior interesse em hardware e eletrônica</li>
+          <li>Inserir módulo introdutório de lógica de programação aplicada (resolve o gap de raciocínio lógico)</li>
+          <li>Avaliar interesse via formulário específico sobre robótica e automação</li>
+        </ul>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">2</div>
+        <div class="rm-period">2026.1 → Piloto</div>
+        <h4>Lançar módulo de robótica integrado</h4>
+        <ul>
+          <li>Criar módulo de 40–60h de Robótica e Automação dentro da trilha Despertar Tec</li>
+          <li>Usar Arduino / Raspberry Pi como plataforma (baixo custo, comunidade enorme)</li>
+          <li>Conectar com empreendedorismo: projetos com aplicação real na comunidade</li>
+          <li>Turma piloto de 20 alunos dos cursos tech existentes</li>
+          <li>Medir NPS, retenção e empregabilidade ao final</li>
+        </ul>
+      </div>
+      <div class="rm-step">
+        <div class="rm-num">3</div>
+        <div class="rm-period">2026.2 → Escala</div>
+        <h4>Expandir como curso autônomo</h4>
+        <ul>
+          <li>Com dados do piloto, estruturar curso completo de Técnico em Robótica / Automação (160h+)</li>
+          <li>Buscar parceria com SENAI ou cursos técnicos da região como destino dos alunos</li>
+          <li>Criar trilha: Informática → Programação → Robótica → Gestão de TI</li>
+          <li>Apresentar à SMADS com dados de demanda validados pelo piloto</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hl gest" style="margin-top:18px">
+      <strong>Conexão com Gestão:</strong> Na fase 3, a trilha pode ramificar para gestão: <em>Robótica → Automação de Processos → Gestão de TI / Projetos de Tecnologia</em>. Isso cria um perfil diferenciado que entende de tecnologia E de negócios — altamente valorizado no mercado atual.
+    </div>
+  </section>
+
+  <!-- S7: RECOMENDAÇÃO FINAL -->
+  <section>
+    <div class="sec-eye"><span class="sec-num">07</span><span class="sec-tag st-rob">Recomendação final</span></div>
+    <h2 class="sec-h">Veredicto estratégico</h2>
+    <div class="reco-dark">
+      <h3>Robótica: <span>implante, mas de forma inteligente</span></h3>
+      <p class="sub">Dentro dos eixos de Gestão e Tecnologia, a robótica passa de "curso de nicho com 2% de demanda" para "3ª maior prioridade dentro do eixo tech, com público de 94 adolescentes já matriculados". A lógica de implantação muda completamente.</p>
+      <div class="rp-grid">
+        <div class="rp go"><div class="rp-n">01</div><h4>✅ Implantar como módulo em 2026.1</h4><p>Integrado ao Despertar Tec como módulo de 40–60h. Turma piloto com alunos tech já matriculados. Sem necessidade de criar nova demanda.</p></div>
+        <div class="rp go"><div class="rp-n">02</div><h4>✅ Usar como ferramenta pedagógica</h4><p>Resolve o gap de raciocínio lógico (37% despreparados) e desenvolve comunicação via projetos em equipe — duas demandas centrais identificadas nos dados.</p></div>
+        <div class="rp watch"><div class="rp-n">03</div><h4>🔵 Conectar gestão + tech via robótica</h4><p>Projetos de automação de processos simples conectam os dois eixos. Um aluno de gestão que entende automação básica tem diferencial real no mercado.</p></div>
+        <div class="rp maybe"><div class="rp-n">04</div><h4>⚠️ Não lançar como curso isolado ainda</h4><p>7 menções diretas não justificam estrutura completa ainda. Pilote integrado, meça resultados em 2026.1 e use os dados para solicitar à SMADS em 2026.2.</p></div>
       </div>
     </div>
   </section>
 
-</main>
+</div><!-- /main -->
+</div><!-- /tab-panel contexto -->
 
 <footer>
-  Análise baseada em dados coletados pela Despertar — 2025.1 e 2025.2 · 6 fontes · 354 respostas sobre cursos · 211 jovens · 75 famílias
+  Análise completa unificada — Despertar 2025.1 e 2025.2 · 6 fontes de dados · 354 respostas sobre cursos · 135 adolescentes (15–17 anos) · 75 famílias
 </footer>
 
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabs.forEach(b => b.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
 </body>
 </html>
